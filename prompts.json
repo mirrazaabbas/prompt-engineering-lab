@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Research Assistant",
+    "description": "Turn a research topic into a structured evidence-focused prompt",
+    "variables": ["topic", "audience", "output_format"],
+    "template": "Act as a careful research assistant. Investigate {topic} for {audience}. Separate established facts from assumptions, identify uncertainties, compare multiple perspectives where relevant, and present the result as {output_format}. End with the most important takeaways and follow-up questions."
+  },
+  {
+    "name": "Content Writer",
+    "description": "Create audience-specific professional content",
+    "variables": ["topic", "audience", "tone"],
+    "template": "Act as a professional content strategist. Create content about {topic} for {audience}. Use a {tone} tone, lead with a strong hook, keep the structure easy to scan, avoid unsupported claims, and finish with a clear call to action."
+  },
+  {
+    "name": "Data Analyst",
+    "description": "Generate a structured data-analysis instruction",
+    "variables": ["dataset", "business_question", "output_format"],
+    "template": "Act as a data analyst. Analyze {dataset} to answer: {business_question}. First check data quality, then summarize relevant metrics, identify patterns and anomalies, explain limitations, and present findings as {output_format}. Do not invent values that are not present in the data."
+  }
+]
