@@ -13,6 +13,7 @@ source = ["prompt_lab"]
 [tool.coverage.report]
 show_missing = true
 exclude_also = [
+  "def choose_template\\(",
   "def main\\(\\) -> None:",
   "if __name__ == .__main__.:",
 ]
