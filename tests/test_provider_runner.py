@@ -68,34 +68,42 @@ class ProviderRunnerTests(unittest.TestCase):
             api_key_env="PROMPT_LAB_MISSING_KEY",
             transport=lambda request, timeout: b"{}",
         )
-        with mock.patch.dict(os.environ, {}, clear=True):
-            with self.assertRaises(RuntimeError):
-                runner.run("hello")
+        with (
+            mock.patch.dict(os.environ, {}, clear=True),
+            self.assertRaises(RuntimeError),
+        ):
+            runner.run("hello")
         with self.assertRaises(ValueError):
             runner.run("   ")
-        with mock.patch.dict(os.environ, {"PROMPT_LAB_MISSING_KEY": "x"}, clear=False):
-            with self.assertRaises(RuntimeError):
-                runner.run("hello")
+        with (
+            mock.patch.dict(os.environ, {"PROMPT_LAB_MISSING_KEY": "x"}, clear=False),
+            self.assertRaises(RuntimeError),
+        ):
+            runner.run("hello")
 
         invalid = OpenAICompatibleRunner(
             model="test-model",
             api_key_env="PROMPT_LAB_MISSING_KEY",
             transport=lambda request, timeout: b'{"choices":[{"message":{"content":""}}]}',
         )
-        with mock.patch.dict(os.environ, {"PROMPT_LAB_MISSING_KEY": "x"}, clear=False):
-            with self.assertRaises(RuntimeError):
-                invalid.run("hello")
+        with (
+            mock.patch.dict(os.environ, {"PROMPT_LAB_MISSING_KEY": "x"}, clear=False),
+            self.assertRaises(RuntimeError),
+        ):
+            invalid.run("hello")
 
     def test_transport_and_usage_helpers(self):
         request = mock.Mock()
         with mock.patch("urllib.request.urlopen", return_value=_FakeResponse(b"ok")):
             self.assertEqual(_transport(request, 1.0), b"ok")
-        with mock.patch(
-            "urllib.request.urlopen",
-            side_effect=urllib.error.URLError("offline"),
+        with (
+            mock.patch(
+                "urllib.request.urlopen",
+                side_effect=urllib.error.URLError("offline"),
+            ),
+            self.assertRaises(RuntimeError),
         ):
-            with self.assertRaises(RuntimeError):
-                _transport(request, 1.0)
+            _transport(request, 1.0)
 
         self.assertIsNone(_optional_int(None))
         self.assertEqual(_optional_int("7"), 7)
