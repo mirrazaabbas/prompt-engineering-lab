@@ -1,3 +1,43 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "prompt-engineering-lab"
+version = "1.0.0"
+description = "PromptOps experiments, regression testing, prompt safety checks, and provider-independent execution boundaries."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+authors = [{name = "Mir Raza Abbas"}]
+keywords = ["prompt-engineering", "promptops", "llm", "evaluation", "regression-testing"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+dependencies = []
+
+[project.scripts]
+prompt-lab = "prompt_lab:main"
+prompt-experiment = "experiments:main"
+
+[project.urls]
+Homepage = "https://github.com/mirrazaabbas/prompt-engineering-lab"
+Repository = "https://github.com/mirrazaabbas/prompt-engineering-lab"
+Issues = "https://github.com/mirrazaabbas/prompt-engineering-lab/issues"
+
+[tool.setuptools]
+py-modules = [
+  "prompt_lab",
+  "promptops",
+  "experiments",
+  "provider_runner",
+  "ai_features",
+  "ai_platform",
+]
+
 [tool.ruff]
 target-version = "py310"
 line-length = 100
@@ -8,7 +48,7 @@ ignore = ["E501"]
 
 [tool.coverage.run]
 branch = true
-source = ["prompt_lab", "promptops"]
+source = ["prompt_lab", "promptops", "experiments", "provider_runner"]
 
 [tool.coverage.report]
 show_missing = true
