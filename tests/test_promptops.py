@@ -19,7 +19,9 @@ class PromptOpsTests(unittest.TestCase):
         self.assertTrue(promptops.validate_output_schema({}, {"answer": str}))
 
     def test_regression_cases_and_compare(self):
-        renderer = lambda variables: f"Hello {variables['name']}"
+        def renderer(variables):
+            return f"Hello {variables['name']}"
+
         baseline = promptops.run_regression_cases(
             "baseline", renderer, [{"variables": {"name": "Mir"}, "required_substrings": ["Mir"]}]
         )
