@@ -6,8 +6,9 @@ import os
 import time
 import urllib.error
 import urllib.request
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Any, Callable, Protocol
+from typing import Any, Protocol
 from urllib.parse import urlparse
 
 Transport = Callable[[urllib.request.Request, float], bytes]
